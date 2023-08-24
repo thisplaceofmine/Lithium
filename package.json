@@ -7,8 +7,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "start": "npm-run-all --parallel watch:build",
     "watch:build": "webpack --watch",
-    "watch:server": "nodemon "
+    "watch:server": "if "
   },
   "dependencies": {
     "axios": "^1.4.0",

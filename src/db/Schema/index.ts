@@ -1,33 +1,31 @@
+export const DataMap = {
+  string: String,
+  number: Number,
+  boolean: Boolean,
+  object: Object,
+  array: Array,
+} as const;
 
-const schemaDataType = [
-  'string',
-  'number',
-  'integer',
-  'decimal',
-  'boolean',
-  'object',
-  'array',
-  'null',
-  'any',
-  'date',
-  'ref',
-] as const
+export type TDataStr = keyof typeof DataMap;
+export type TDataConstr = (typeof DataMap)[TDataStr];
+export type TPrimitiveShort = TDataConstr | TDataStr | TDataConstr[] | TDataStr[];
+export type TPrimitiveDetail = { type: TPrimitiveShort, required?: boolean, defaultValue?: any };
 
-type SchemaDataType = typeof schemaDataType[number]
+export type TPrimitive = TPrimitiveShort | TPrimitiveDetail | TPrimitiveDetail[];
 
-interface SchemaItem {
-  type: SchemaDataType
-  required?: boolean
-  default?: any
-  enum?: any[]
-  min?: number
-  max?: number
-  minLength?: number
-  maxLength?: number
+export type TPointer = {
+  type: 'pointer',
+  ref: string,
+  required?: boolean,
 }
 
-class Schema {
-  constructor() {
-
-  }
+export type TReference = {
+  type: 'ref',
+  ref: string,
+  forignField?: string,
+  required?: boolean,
 }
+
+export type TSchema = {
+  [key: string]: TPrimitive | TPointer | TReference,
+};

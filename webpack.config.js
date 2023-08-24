@@ -12,6 +12,7 @@ module.exports = {
       },
     ],
   },
+  mode: 'development',
   plugins:[
     new Dotenv()
   ],
@@ -22,4 +23,8 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  watchOptions: {
+    aggregateTimeout: 200,
+    ignored: ['**/node_modules', '**/dist', '**/build', '**/public']
+  }
 };
