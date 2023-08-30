@@ -1,31 +1,27 @@
-export const DataMap = {
-  string: String,
-  number: Number,
-  boolean: Boolean,
-  object: Object,
-  array: Array,
-} as const;
+ import { TSchema } from './types'
+ 
+ class Schema {
+  schema: TSchema = {}
+  constructor(schema: string | TSchema) {
+    this.init(schema)
+  }
 
-export type TDataStr = keyof typeof DataMap;
-export type TDataConstr = (typeof DataMap)[TDataStr];
-export type TPrimitiveShort = TDataConstr | TDataStr | TDataConstr[] | TDataStr[];
-export type TPrimitiveDetail = { type: TPrimitiveShort, required?: boolean, defaultValue?: any };
+  private init(schema: string | TSchema): void | never {
 
-export type TPrimitive = TPrimitiveShort | TPrimitiveDetail | TPrimitiveDetail[];
+  }
 
-export type TPointer = {
-  type: 'pointer',
-  ref: string,
-  required?: boolean,
-}
 
-export type TReference = {
-  type: 'ref',
-  ref: string,
-  forignField?: string,
-  required?: boolean,
-}
+  public static stringify(input: TSchema): string {
+    const obj = {}
 
-export type TSchema = {
-  [key: string]: TPrimitive | TPointer | TReference,
-};
+
+
+    return JSON.stringify(obj)
+  }
+
+  public static parse(input: string): TSchema {
+    return {}
+  }
+
+
+ }
